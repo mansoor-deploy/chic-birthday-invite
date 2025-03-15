@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import CountdownTimer from "@/components/CountdownTimer";
@@ -10,7 +9,6 @@ import AudioPlayer from "@/components/AudioPlayer";
 import { Separator } from "@/components/ui/separator";
 import { Heart, Gift, MapPin, Calendar, Users } from "lucide-react";
 
-// Sample birthday data - in a real app, this would come from an API or CMS
 const birthdayPerson = {
   name: "Alexandra",
   date: new Date("2023-11-15T19:00:00"), // Set this to a future date
@@ -42,7 +40,6 @@ const Index = () => {
   const [activeTab, setActiveTab] = useState("event");
   const [isScrolled, setIsScrolled] = useState(false);
 
-  // Check if user has scrolled down
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
@@ -54,7 +51,6 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Header with animation depending on scroll */}
       <header className={`fixed top-0 left-0 right-0 z-40 transition-all duration-500 py-4 ${
         isScrolled ? "bg-white/90 shadow-sm backdrop-blur-md" : "bg-transparent"
       }`}>
@@ -67,7 +63,6 @@ const Index = () => {
         </div>
       </header>
 
-      {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center pt-20 pb-16 px-4">
         <div className="absolute inset-0 z-0">
           <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1492684223066-81342ee5ff30?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80')] bg-cover bg-center opacity-10"></div>
@@ -184,7 +179,6 @@ const Index = () => {
         </div>
       </section>
       
-      {/* Footer */}
       <footer className="bg-secondary py-6">
         <div className="container text-center text-sm text-muted-foreground">
           <p>&copy; {new Date().getFullYear()} | {birthdayPerson.name}'s {birthdayPerson.age}th Birthday Celebration</p>
@@ -192,7 +186,6 @@ const Index = () => {
         </div>
       </footer>
       
-      {/* Audio Player */}
       <AudioPlayer />
     </div>
   );
