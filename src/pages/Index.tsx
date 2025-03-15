@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import CountdownTimer from "@/components/CountdownTimer";
@@ -6,6 +7,7 @@ import VenueMap from "@/components/VenueMap";
 import PhotoGallery from "@/components/PhotoGallery";
 import GiftRegistry from "@/components/GiftRegistry";
 import AudioPlayer from "@/components/AudioPlayer";
+import AddToCalendar from "@/components/AddToCalendar";
 import { Separator } from "@/components/ui/separator";
 import { Heart, Gift, MapPin, Calendar, Users } from "lucide-react";
 
@@ -34,6 +36,15 @@ const birthdayPerson = {
     { id: 3, name: "Flowers", description: "I love fresh flowers - lilies and roses are my favorites", icon: "gift" },
     { id: 4, name: "Wine Collection", description: "I'm building my wine collection - red wines preferred", icon: "gift" },
   ]
+};
+
+// Create calendar event data
+const calendarEvent = {
+  name: `${birthdayPerson.name}'s ${birthdayPerson.age}th Birthday Celebration`,
+  description: `Please join us for an elegant evening celebrating ${birthdayPerson.name}'s ${birthdayPerson.age}th birthday. Dinner, drinks, and dancing to follow.`,
+  location: birthdayPerson.venue.address,
+  startDate: birthdayPerson.date,
+  endDate: new Date(birthdayPerson.date.getTime() + 4 * 60 * 60 * 1000), // 4 hours after start
 };
 
 const Index = () => {
@@ -78,10 +89,14 @@ const Index = () => {
               <CountdownTimer targetDate={birthdayPerson.date} />
             </div>
             
-            <p className="max-w-xl mx-auto text-muted-foreground">
+            <p className="max-w-xl mx-auto text-muted-foreground mb-8">
               Please join us for an elegant evening celebrating {birthdayPerson.name}'s {birthdayPerson.age}th birthday.
               Dinner, drinks, and dancing to follow.
             </p>
+            
+            <div className="flex justify-center">
+              <AddToCalendar event={calendarEvent} />
+            </div>
           </div>
           
           <Tabs 

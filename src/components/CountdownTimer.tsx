@@ -1,5 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
+import { Clock } from 'lucide-react';
 
 interface CountdownTimerProps {
   targetDate: Date;
@@ -44,12 +45,17 @@ const CountdownTimer: React.FC<CountdownTimerProps> = ({ targetDate }) => {
   }
 
   return (
-    <div className="py-6 flex justify-center">
+    <div className="py-6 flex flex-col items-center">
+      <div className="flex items-center mb-4 text-gold">
+        <Clock className="h-5 w-5 mr-2" />
+        <span className="font-medium text-sm uppercase tracking-wider">Time Remaining</span>
+      </div>
+      
       <div className="grid grid-cols-4 gap-3 md:gap-6">
         {timeBlocks.map((block, index) => (
           <div key={index} className="flex flex-col items-center animate-fade-in" style={{ animationDelay: `${index * 0.1}s` }}>
-            <div className="flex items-center justify-center w-14 h-14 md:w-20 md:h-20 border-2 border-gold/30 rounded-sm bg-white/50 backdrop-blur-sm shadow-sm gold-gradient">
-              <span className="font-serif text-xl md:text-3xl font-medium">{block.value}</span>
+            <div className="flex items-center justify-center w-16 h-16 md:w-24 md:h-24 border border-gold/30 rounded-md bg-white/70 backdrop-blur-sm shadow-md gold-gradient">
+              <span className="font-serif text-2xl md:text-4xl font-medium">{String(block.value).padStart(2, '0')}</span>
             </div>
             <span className="text-xs md:text-sm mt-2 text-muted-foreground font-medium tracking-wide">{block.label}</span>
           </div>
