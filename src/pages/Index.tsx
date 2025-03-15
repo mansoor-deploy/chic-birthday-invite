@@ -32,10 +32,10 @@ const birthdayPerson = {
     { id: 6, src: "https://images.unsplash.com/photo-1598623536383-97c54a57c4aa?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1700&q=80", alt: "Party toast" },
   ],
   gifts: [
-    { id: 1, name: "Donation to Charity", description: "A contribution to my favorite charity in lieu of gifts would be wonderful.", link: "https://www.example.org/donate", icon: "heart" },
-    { id: 2, name: "Gift Card", description: "A gift card to my favorite store - Nordstrom", link: "https://www.nordstrom.com/gift-cards", icon: "shopping" },
-    { id: 3, name: "Flowers", description: "I love fresh flowers - lilies and roses are my favorites", icon: "gift" },
-    { id: 4, name: "Wine Collection", description: "I'm building my wine collection - red wines preferred", icon: "gift" },
+    { id: 1, name: "Donation to Charity", description: "A contribution to my favorite charity in lieu of gifts would be wonderful.", link: "https://www.example.org/donate", icon: "heart" as "heart" },
+    { id: 2, name: "Gift Card", description: "A gift card to my favorite store - Nordstrom", link: "https://www.nordstrom.com/gift-cards", icon: "shopping" as "shopping" },
+    { id: 3, name: "Flowers", description: "I love fresh flowers - lilies and roses are my favorites", icon: "gift" as "gift" },
+    { id: 4, name: "Wine Collection", description: "I'm building my wine collection - red wines preferred", icon: "gift" as "gift" },
   ],
   videoMessage: {
     title: "A Message For You",
@@ -57,10 +57,19 @@ const Index = () => {
   const [activeTab, setActiveTab] = useState("event");
   const [isScrolled, setIsScrolled] = useState(false);
   const [showVideoMessage, setShowVideoMessage] = useState(false);
+  const [showVideoIcon, setShowVideoIcon] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
+      
+      // Show video icon when user reaches the bottom of the page
+      const scrollPosition = window.scrollY + window.innerHeight;
+      const documentHeight = document.documentElement.scrollHeight;
+      
+      if (scrollPosition >= documentHeight - 100) {
+        setShowVideoIcon(true);
+      }
     };
     
     window.addEventListener("scroll", handleScroll);
@@ -81,22 +90,24 @@ const Index = () => {
         </div>
       </header>
 
-      {/* Floating Message Button */}
-      <div 
-        className="fixed top-24 right-6 z-50 cursor-pointer animate-[pulse_2s_cubic-bezier(0.4,0,0.6,1)_infinite] hover:scale-110 transition-transform"
-        onClick={() => setShowVideoMessage(true)}
-      >
-        <div className="relative p-3 bg-gold/80 hover:bg-gold rounded-full shadow-lg backdrop-blur-sm">
-          <div className="absolute inset-0 rounded-full animate-ping bg-gold/40"></div>
-          <div className="relative flex items-center justify-center size-10">
-            <span className="sr-only">Watch video message</span>
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M21.2 8.4c.5.38.8.97.8 1.6v4a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V10a2 2 0 0 1 2-2h16a2 2 0 0 1 1.2.4z" />
-              <path d="M8 16V8l5 4-5 4z" />
-            </svg>
+      {/* Floating Message Button - Only appears after reaching bottom */}
+      {showVideoIcon && (
+        <div 
+          className="fixed bottom-12 right-[-30px] z-50 cursor-pointer animate-[pulse_2s_cubic-bezier(0.4,0,0.6,1)_infinite] hover:right-[-20px] transition-all duration-300"
+          onClick={() => setShowVideoMessage(true)}
+        >
+          <div className="relative p-3 bg-gold/80 hover:bg-gold rounded-full shadow-lg backdrop-blur-sm">
+            <div className="absolute inset-0 rounded-full animate-ping bg-gold/40"></div>
+            <div className="relative flex items-center justify-center size-10">
+              <span className="sr-only">Watch video message</span>
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M21.2 8.4c.5.38.8.97.8 1.6v4a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V10a2 2 0 0 1 2-2h16a2 2 0 0 1 1.2.4z" />
+                <path d="M8 16V8l5 4-5 4z" />
+              </svg>
+            </div>
           </div>
         </div>
-      </div>
+      )}
 
       <section className="relative min-h-screen flex items-center justify-center pt-20 pb-16 px-4">
         <div className="absolute inset-0 z-0">
