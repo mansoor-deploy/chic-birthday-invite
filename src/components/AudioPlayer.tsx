@@ -36,12 +36,12 @@ const AudioPlayer = () => {
     <div className="fixed bottom-6 right-6 z-50">
       <button 
         onClick={toggleMute}
-        className="bg-white/90 hover:bg-white p-3 rounded-full shadow-md transition-all duration-300 border border-gold/20"
+        className="bg-white/80 hover:bg-white p-3 rounded-full shadow-md transition-all duration-300 border border-gold/30 backdrop-blur-sm"
         aria-label={isMuted ? "Unmute background music" : "Mute background music"}
       >
         {isMuted ? 
-          <VolumeX className="w-5 h-5 text-charcoal" /> : 
-          <Volume2 className="w-5 h-5 text-charcoal" />
+          <VolumeX className="w-5 h-5 text-gold" /> : 
+          <Volume2 className="w-5 h-5 text-gold" />
         }
       </button>
       <audio 

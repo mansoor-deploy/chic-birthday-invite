@@ -48,10 +48,10 @@ const CountdownTimer: React.FC<CountdownTimerProps> = ({ targetDate }) => {
       <div className="grid grid-cols-4 gap-3 md:gap-6">
         {timeBlocks.map((block, index) => (
           <div key={index} className="flex flex-col items-center animate-fade-in" style={{ animationDelay: `${index * 0.1}s` }}>
-            <div className="flex items-center justify-center w-14 h-14 md:w-20 md:h-20 border-2 border-gold/30 rounded-sm">
+            <div className="flex items-center justify-center w-14 h-14 md:w-20 md:h-20 border-2 border-gold/30 rounded-sm bg-white/50 backdrop-blur-sm shadow-sm gold-gradient">
               <span className="font-serif text-xl md:text-3xl font-medium">{block.value}</span>
             </div>
-            <span className="text-xs md:text-sm mt-2 text-muted-foreground">{block.label}</span>
+            <span className="text-xs md:text-sm mt-2 text-muted-foreground font-medium tracking-wide">{block.label}</span>
           </div>
         ))}
       </div>
