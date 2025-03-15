@@ -10,6 +10,7 @@ import AudioPlayer from "@/components/AudioPlayer";
 import AddToCalendar from "@/components/AddToCalendar";
 import { Separator } from "@/components/ui/separator";
 import { Heart, Gift, MapPin, Calendar, Users } from "lucide-react";
+import VideoMessage from "@/components/VideoMessage";
 
 const birthdayPerson = {
   name: "Alexandra",
@@ -35,7 +36,12 @@ const birthdayPerson = {
     { id: 2, name: "Gift Card", description: "A gift card to my favorite store - Nordstrom", link: "https://www.nordstrom.com/gift-cards", icon: "shopping" },
     { id: 3, name: "Flowers", description: "I love fresh flowers - lilies and roses are my favorites", icon: "gift" },
     { id: 4, name: "Wine Collection", description: "I'm building my wine collection - red wines preferred", icon: "gift" },
-  ]
+  ],
+  videoMessage: {
+    title: "A Message For You",
+    description: "Hi there! I'm so excited to invite you to my birthday celebration. I can't wait to see you!",
+    url: "https://www.example.com/birthday-video.mp4", // Replace with actual video URL
+  }
 };
 
 // Create calendar event data
@@ -50,6 +56,7 @@ const calendarEvent = {
 const Index = () => {
   const [activeTab, setActiveTab] = useState("event");
   const [isScrolled, setIsScrolled] = useState(false);
+  const [showVideoMessage, setShowVideoMessage] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -73,6 +80,23 @@ const Index = () => {
           </h1>
         </div>
       </header>
+
+      {/* Floating Message Button */}
+      <div 
+        className="fixed top-24 right-6 z-50 cursor-pointer animate-[pulse_2s_cubic-bezier(0.4,0,0.6,1)_infinite] hover:scale-110 transition-transform"
+        onClick={() => setShowVideoMessage(true)}
+      >
+        <div className="relative p-3 bg-gold/80 hover:bg-gold rounded-full shadow-lg backdrop-blur-sm">
+          <div className="absolute inset-0 rounded-full animate-ping bg-gold/40"></div>
+          <div className="relative flex items-center justify-center size-10">
+            <span className="sr-only">Watch video message</span>
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M21.2 8.4c.5.38.8.97.8 1.6v4a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V10a2 2 0 0 1 2-2h16a2 2 0 0 1 1.2.4z" />
+              <path d="M8 16V8l5 4-5 4z" />
+            </svg>
+          </div>
+        </div>
+      </div>
 
       <section className="relative min-h-screen flex items-center justify-center pt-20 pb-16 px-4">
         <div className="absolute inset-0 z-0">
@@ -202,6 +226,15 @@ const Index = () => {
       </footer>
       
       <AudioPlayer />
+      
+      {/* Video Message Dialog */}
+      <VideoMessage 
+        isOpen={showVideoMessage} 
+        onClose={() => setShowVideoMessage(false)}
+        title={birthdayPerson.videoMessage.title}
+        description={birthdayPerson.videoMessage.description}
+        videoUrl={birthdayPerson.videoMessage.url}
+      />
     </div>
   );
 };
