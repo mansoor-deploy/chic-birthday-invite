@@ -85,7 +85,7 @@
   }
   
   .gold-border {
-    @apply border border-gold/20 hover:border-gold/40 transition-duration-300;
+    @apply border border-gold/20 hover:border-gold/40 duration-300;
   }
   
   .card-with-pattern {
